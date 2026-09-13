@@ -19,6 +19,7 @@ void main(){
   gl_Position = projectionMatrix * mv;
 }`;
 const frag = /* glsl */`
+uniform float uFade;
 varying vec3 vC; varying float vA;
 void main(){
   vec2 d = gl_PointCoord - .5;
