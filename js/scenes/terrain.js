@@ -33,8 +33,8 @@ void main(){
   vec2 rd = uv*vec2(1.6,.7);
   float march = .04;
   bool hit=false; vec3 pc; float h;
-  for (int i=0;i<64;i++){
-    float t = i*.35 + 1.0;
+  for (int i=0;i<48;i++){
+    float t = i*2.6 + 1.0;                       // hard step, bounded loop for mobile GPUs
     vec2 gp = uv.xy*t*1.3 + vec2(0.0, uT*2.4);
     h = terr(gp);
     float camH = ro + t*.16;                   // gentle downward pitch of ray

@@ -8,16 +8,18 @@ import starfield from './scenes/starfield.js';
 import tunnel from './scenes/tunnel.js';
 import terrain from './scenes/terrain.js';
 import scroller from './scenes/scroller.js';
+import boxfly from './scenes/boxfly.js';
 import finale from './scenes/finale.js';
 
 const FADE = 1.5;
 // TIMELINE_START: each entry {name, dur, mod} - durations must sum to LOOP
 const TIMELINE = [
-  { name:'STARFIELD WARP', dur: LOOP*0.20, mod: starfield },
-  { name:'TUNNEL VISION',  dur: LOOP*0.20, mod: tunnel },
-  { name:'SUNSET FLYOVER', dur: LOOP*0.20, mod: terrain },
-  { name:'GREETINGS',      dur: LOOP*0.16, mod: scroller },
-  { name:'ASCENSION',      dur: LOOP*0.24, mod: finale },
+  { name:'STARFIELD WARP', dur: LOOP*0.16, mod: starfield },
+  { name:'TUNNEL VISION',  dur: LOOP*0.16, mod: tunnel },
+  { name:'BOXY',           dur: LOOP*0.16, mod: boxfly },
+  { name:'SUNSET FLYOVER', dur: LOOP*0.18, mod: terrain },
+  { name:'GREETINGS',      dur: LOOP*0.14, mod: scroller },
+  { name:'ASCENSION',      dur: LOOP*0.20, mod: finale },
 ];
 // TIMELINE_END
 

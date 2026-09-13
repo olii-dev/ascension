@@ -6,8 +6,8 @@
 export const BPM = 133;
 export const BEAT = 60 / BPM;              // seconds per beat
 export const BAR = BEAT * 4;               // seconds per bar
-export const BARS = 32;                    // 32-bar loop = 128 beats
-export const LOOP = BAR * BARS;            // ~57.6 s
+export const BARS = 36;                    // 36-bar loop = 144 beats
+export const LOOP = BAR * BARS;            // ~65 s
 
 // A minor scale degrees used: A2 root bass, arp notes from A minor + G F
 const ARP = [
@@ -16,6 +16,7 @@ const ARP = [
   {bar:8,  pat:[0,3,7,12, 10,7,3,0, -2,3,7,10, 12,10,7,3]},     // F
   {bar:12, pat:[-2,5,7,12, 7,5,-2,-5, 0,3,7,12, 15,12,7,3]},    // G
   {bar:16, pat:[0,7,12,19, 17,12,7,0, 3,10,15,22, 20,15,10,3]}, // Am->C spread
+  {bar:24, pat:[7,12,16,19, 17,14,12,7, 3,7,10,14, 12,10,7,3]}, // high answer
 ];
 const BASS = [0,0,12,0, 0,-3,0,3]; // 8th-note bass root movement per bar-pair
 
@@ -26,8 +27,8 @@ export function buildEvents(){
     ['drive', 0, 8,  'four'],   // four on the floor
     ['build', 8, 16, 'four'],
     ['stab',  16, 24, 'four'],
-    ['out',   24, 28, 'four'],
-    ['idle',  28, 32, 'none'],
+    ['out',   24, 32, 'four'],
+    ['idle',  32, 36, 'none'],
   ];
   for (const [, b0, b1, pat] of kickBars){
     for (let b = b0; b < b1; b++){
@@ -51,7 +52,7 @@ export function buildEvents(){
     }
   }
   // bass: 8th notes, root follows BASS table (A2 = 55hz via midi 45)
-  for (let b = 0; b < 28; b++){
+  for (let b = 0; b < 32; b++){
     for (let e = 0; e < 8; e++){
       const st = BASS[(b*8+e) % BASS.length];
       const t = (b*4)*BEAT + e*BEAT/2;
@@ -68,9 +69,9 @@ export function buildEvents(){
       });
     }
   }
-  // riser sfx at end of each 8-bar section, crash into bar 16 & 24
-  [7.5, 15.5, 23.5].forEach(b=> ev.push({ t:b*4*BEAT, type:'riser', dur: 4*BEAT }));
-  [16,24].forEach(b=> ev.push({ t:b*4*BEAT, type:'crash' }));
+  // riser sfx at end of each 8-bar section, crash into the big shifts
+  [7.5, 15.5, 23.5, 31.5].forEach(b=> ev.push({ t:b*4*BEAT, type:'riser', dur: 4*BEAT }));
+  [16,24,32].forEach(b=> ev.push({ t:b*4*BEAT, type:'crash' }));
   ev.sort((a,c)=>a.t-c.t);
   return ev;
 }

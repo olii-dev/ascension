@@ -13,6 +13,7 @@ const LINES = [
   ' SPECIAL THANKS TO ... THE UNICorns OF OPEN SOURCE ... THREE.JS ... GLSL ... AND THE HUMBLE SCANLINE ',
   '',
   ' NO FRAMEWORKS NO BUILDERS NO ASSETS ......... PURE CODE ......... 60FPS OR BUST ',
+  ' BOXY THE SMILEY ........ WAVE AT HIM, HE HAS TRAVELLED 288 INSTANCES TO BE HERE ',
   ' THIS DEMO RUNS IN YOUR BROWSER RIGHT NOW. RECORD THE SCREENER, SHOW YOUR FRIENDS, BELIEVE YOUR EYES ',
   '',
   ' ASCENSION CONTINUES ......... NEXT SCENE ......... PLASMA ......... FINALE ......... ',
@@ -59,7 +60,7 @@ void main(){
 
 export default function scroller(){
   const {tex} = makeTexture();
-  const geo = new THREE.PlaneGeometry(64, 8, 64, 24);
+  const geo = new THREE.PlaneGeometry(64, 10, 64, 24);  // matches 4096x640 canvas aspect
   const mat = new THREE.ShaderMaterial({ vertexShader:vert, fragmentShader:frag,
     uniforms:{ map_:{value:tex}, uT:{value:0}, uFade:{value:1} },
     transparent:true, side:THREE.DoubleSide });

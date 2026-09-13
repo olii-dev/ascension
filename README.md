@@ -13,11 +13,12 @@ oscillator, the text is rasterised at runtime.
 |----|-----------------|-------------------------------------------------------|
 | S1 | Starfield Warp  | 20,000 GPU-recycled points flying past the camera     |
 | S2 | Tunnel Vision   | Catmull-Rom tube, scrolling neon grid, banking camera |
-| S3 | Sunset Flyover  | Raymarched fbm terrain with fog and a low sun         |
-| S4 | Greetings       | Scroller credit, chromatic-split text on a waving plane |
-| S5 | Ascension       | 256-plasma finale, additive torus knots, title card   |
+| S3 | Boxy            | 288-instance Euclidean boxfly, procedural smileys     |
+| S4 | Sunset Flyover  | Raymarched fbm terrain with fog and a low sun         |
+| S5 | Greetings       | Scroller credit, chromatic-split text on a waving plane |
+| S6 | Ascension       | 256-plasma finale, additive torus knots, title card   |
 
-The 57.6s loop is clocked off `AudioContext.currentTime` - a kick-drum sample
+The 65s loop is clocked off `AudioContext.currentTime` - a kick-drum sample
 schedule drives scene cuts, not `requestAnimationFrame` drift. The music is
 133 BPM A-minor techno composed in `js/audio.js`: synthesised kick, noise
 snare/hats, filtered saw bass, square-wave arpeggio, band-passed riser and

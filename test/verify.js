@@ -24,11 +24,12 @@ ok('audio: BPM in 128-140 range', bpmHz >= 128/60 && bpmHz <= 140/60, BPM + ' BP
 const main = readFileSync(new URL('../js/main.js', import.meta.url), 'utf8');
 const block = main.split('// TIMELINE_START')[1].split('// TIMELINE_END')[0];
 const rows = [...block.matchAll(/\{\s*name:'([^']+)'\s*,\s*dur:\s*LOOP\*([\d.]+)\s*,\s*mod:\s*(\w+)\s*\}/g)];
-ok('timeline: 5 scenes', rows.length === 5, rows.map(r=>r[1]).join(', '));
+ok('timeline: 6 scenes', rows.length === 6, rows.map(r=>r[1]).join(', '));
 const sum = rows.reduce((a,r)=>a+parseFloat(r[2]), 0);
 ok('timeline: fractions sum to 1.0', Math.abs(sum-1) < 1e-9, 'sum=' + sum);
 const expect = { starfield:'js/scenes/starfield.js', tunnel:'js/scenes/tunnel.js',
-  terrain:'js/scenes/terrain.js', scroller:'js/scenes/scroller.js', finale:'js/scenes/finale.js' };
+  terrain:'js/scenes/terrain.js', scroller:'js/scenes/scroller.js',
+  boxfly:'js/scenes/boxfly.js', finale:'js/scenes/finale.js' };
 for (const r of rows){
   const mod = r[3];
   const imp = "./" + expect[mod].replace("js/", "");   // main.js imports ./scenes/...
@@ -36,5 +37,4 @@ for (const r of rows){
      main.includes("from '"+imp+"'") && existsSync(new URL('../'+expect[mod], import.meta.url)));
 }
 ok('loop length 45-90s', LOOP >= 45 && LOOP <= 90, LOOP.toFixed(1)+'s');
-
 process.exit(fail ? 1 : 0);
