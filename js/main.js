@@ -29,6 +29,9 @@ const post = createPost(renderer);
 const audio = createAudio();
 
 const built = [];
+// adaptive-resolution governor: median frame time over a window decides quality
+const QUALS = [1, 0.75, 0.5];
+let qIdx = 0, ft = [], lastNow = 0;
 // title-card texture: canvas text composited over the frame by the post pass
 const title = (()=>{
   const cv=document.createElement('canvas'); cv.width=2048; cv.height=512;
@@ -62,6 +65,20 @@ function sceneAt(t){
 function frame(){
   requestAnimationFrame(frame);
   if (!running) return;
+  const now = performance.now();
+  if (lastNow){
+    ft.push(now - lastNow);
+    if (ft.length > 45){
+      ft.sort((a,b)=>a-b);
+      const med = ft[ft.length>>1];
+      if (med > 30 && qIdx < QUALS.length-1){        // under ~33fps: drop res one notch
+        qIdx++; post.setQuality(QUALS[qIdx]);
+        hud.textContent += ' [half-res mode]';
+      }
+      ft.length = 0;
+    }
+  }
+  lastNow = now;
   const t = audio.time();
   const idx = sceneAt(t);
   const cur = built[idx], curI = inst(cur);

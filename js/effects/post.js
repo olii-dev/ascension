@@ -55,13 +55,17 @@ export function createPost(renderer){
   });
   const quad = new THREE.Mesh(new THREE.PlaneGeometry(2,2), mat);
   scene.add(quad);
+  let quality = 1, lastW = 1, lastH = 1;
   function resize(w,h){
-    const dpr = Math.min(devicePixelRatio||1, 1.75);
+    lastW=w; lastH=h;
+    const dpr = Math.min(devicePixelRatio||1, 1.75) * (quality||1);
     renderer.setPixelRatio(dpr); renderer.setSize(w,h,false);
     rtA.setSize(Math.floor(w*dpr), Math.floor(h*dpr));
     rtB.setSize(Math.floor(w*dpr), Math.floor(h*dpr));
     mat.uniforms.uRes.value.set(w*dpr, h*dpr);
   }
+  // quality: 1 -> 0.75 -> 0.5; chosen by main.js based on measured frame times
+  function setQuality(q){ quality = q; resize(lastW, lastH); }
   // Render sceneA into rtA; if sceneB given (crossfade) it goes to rtB, uMix blends.
   function render(aScene, aCam, bScene, bCam, t, mix, titleTex, titleAmt){
     renderer.setRenderTarget(rtA); renderer.render(aScene, aCam);
@@ -73,5 +77,5 @@ export function createPost(renderer){
     renderer.render(scene, cam);
   }
   function dispose(){ rtA.dispose(); rtB.dispose(); mat.dispose(); quad.geometry.dispose(); }
-  return { resize, render, dispose };
+  return { resize, render, setQuality, dispose };
 }
