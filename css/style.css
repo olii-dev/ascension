@@ -1,0 +1,17 @@
+:root{ --bg:#05060a; --tx:#e8e6df; --ac:#ffd166; --dim:#8a877e }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);overflow:hidden;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;color:var(--tx)}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse at 50% 40%, #0b1020 0%, #05060a 70%);padding:28px;text-align:center;z-index:10}
+#overlay.hide{display:none}
+h1{font-size:clamp(38px,9vw,86px);letter-spacing:.22em;font-weight:700;color:var(--tx);text-shadow:0 0 30px #ffd16655}
+p{max-width:46ch;color:var(--dim);font-size:13.5px;line-height:1.7}
+.hint{font-size:11px;color:var(--dim);letter-spacing:.08em}
+button.big{font:inherit;font-size:15px;letter-spacing:.2em;padding:16px 34px;background:transparent;color:var(--ac);border:1px solid var(--ac);cursor:pointer;min-height:52px}
+button.big:hover,button.big:focus-visible{background:var(--ac);color:#000}
+button.big.rec{color:#7dd3fc;border-color:#7dd3fc}
+button.big.rec:hover{background:#7dd3fc;color:#000}
+button.big:disabled{opacity:.35;cursor:not-allowed}
+#hud{position:fixed;left:0;right:0;bottom:10px;display:none;justify-content:space-between;padding:0 14px;font-size:10px;letter-spacing:.16em;color:#ffffff40;z-index:5;pointer-events:none}
+body.running #hud{display:flex}
+body.running #overlay{display:none}

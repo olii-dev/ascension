@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ASCENSION - a realtime WebGL demo</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="overlay">
+  <h1>ASCENSION</h1>
+  <p>five scenes, one file of math, zero assets &mdash; everything you are about to see is generated at runtime, in sync with a synth track written in code.</p>
+  <button id="start" class="big">START</button>
+  <button id="record" class="big rec" disabled>RECORD 12s SCREENER</button>
+  <p class="hint">tap / space to start &middot; R records &middot; esc stops</p>
+</div>
+<div id="hud"><span id="sceneName"></span></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

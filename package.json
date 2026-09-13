@@ -1,0 +1,10 @@
+{
+  "name": "ascension",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "five-scene realtime WebGL demo, procedural audio, zero assets",
+  "scripts": {
+    "test": "node test/verify.js"
+  }
+}
